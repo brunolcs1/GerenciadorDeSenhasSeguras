@@ -62,8 +62,8 @@ java -cp bin ui.PasswordManagerApp
 ```
 ### Uso
 A aplicação será iniciada no terminal com uma tela de autenticação.
-Usuário padrão: **admin**
-Chave mestre: **admin123**
+- Usuário padrão: **admin**
+- Chave mestre: **admin123**
 Após autenticar, use o menu para navegar.
 
 ---
