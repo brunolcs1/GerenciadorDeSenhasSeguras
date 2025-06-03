@@ -17,18 +17,9 @@ import java.util.Map;
 public class PasswordStorage {
     private static final String ARQUIVO = "passwords.json";
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private static final Type tipoDados = new TypeToken<Map<String, Conta>>() {}.getType();
+    private static final Type tipoDados = new TypeToken<Map<String, List<Conta>>>() {}.getType();
 
-    public static Map<String, Conta> carregarDoArquivoSimples() {
-        try (FileReader reader = new FileReader(ARQUIVO)) {
-            return gson.fromJson(reader, new TypeToken<Map<String, Conta>>(){}.getType());
-        } catch (IOException | JsonSyntaxException e) {
-            System.out.println("Falha ao abrir dados. Criando armazenamento novo.");
-            return new HashMap<>();
-        }
-    }
-
-    public static void salvarEmArquivo(Map<String, Conta> dados) {
+    public static void salvarEmArquivo(Map<String, List<Conta>> dados) {
         try (FileWriter writer = new FileWriter(ARQUIVO)) {
             gson.toJson(dados, writer);
         } catch (IOException e) {
@@ -36,7 +27,7 @@ public class PasswordStorage {
         }
     }
 
-    public static Map<String, Conta> carregarDoArquivo() {
+    public static Map<String, List<Conta>> carregarDoArquivo() {
         try (FileReader reader = new FileReader(ARQUIVO)) {
             return gson.fromJson(reader, tipoDados);
         } catch (IOException | JsonSyntaxException e) {

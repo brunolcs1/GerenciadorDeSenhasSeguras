@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 public class PasswordService {
-    private final Map<String, Conta> senhas = new HashMap<>();
+    private final Map<String, List<Conta>> senhas = new HashMap<>();
 
     public void salvarSenha(String servico, String usuario, String senha) {
         String senhaHash = org.mindrot.jbcrypt.BCrypt.hashpw(senha, org.mindrot.jbcrypt.BCrypt.gensalt());
 
         Conta novaConta = new Conta(usuario, senhaHash);
-        senhas.put(servico, novaConta);
+        senhas.computeIfAbsent(servico, k -> new ArrayList<>()).add(novaConta);
 
         PasswordStorage.salvarEmArquivo(senhas);
 
@@ -22,14 +22,17 @@ public class PasswordService {
 
     public void listarSenhas() {
         System.out.println("Serviços cadastrados:");
-        for (Map.Entry<String, Conta> entry : senhas.entrySet()) {
-            System.out.println("- " + entry.getKey() + ":");
-            System.out.println("    " + entry.getValue());
+        for (String servico : senhas.keySet()) {
+            List<Conta> contas = senhas.get(servico);
+            System.out.println("- " + servico + ":");
+            for (Conta conta : contas) {
+                System.out.println("    " + conta);
+            }
         }
     }
 
     public void carregarSenhas() {
-        Map<String, Conta> dados = PasswordStorage.carregarDoArquivoSimples();
+        Map<String, List<Conta>> dados = PasswordStorage.carregarDoArquivo();
         if (dados != null) {
             senhas.putAll(dados);
         }
