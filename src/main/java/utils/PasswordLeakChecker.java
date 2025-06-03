@@ -1,6 +1,8 @@
 package utils;
 
+// Classe principal que representa PasswordLeakChecker
 public class PasswordLeakChecker {
+// Método que executa verificarVazamento
     public static void verificarVazamento(String senha) {
         System.out.println("Consultando possíveis vazamentos da senha com Have I Been Pwned...");
         boolean vazada = HIBPClient.senhaVazada(senha);

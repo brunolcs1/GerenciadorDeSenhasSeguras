@@ -14,11 +14,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// Classe principal que representa PasswordStorage
 public class PasswordStorage {
+// Atributo privado
     private static final String ARQUIVO = "passwords.json";
+// Método auxiliar: GsonBuilder
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+// Método auxiliar: List<Conta>>>
     private static final Type tipoDados = new TypeToken<Map<String, List<Conta>>>() {}.getType();
 
+// Método que executa salvarEmArquivo
     public static void salvarEmArquivo(Map<String, List<Conta>> dados) {
         try (FileWriter writer = new FileWriter(ARQUIVO)) {
             gson.toJson(dados, writer);
@@ -27,6 +32,7 @@ public class PasswordStorage {
         }
     }
 
+// Construtor ou método público: carregarDoArquivo
     public static Map<String, List<Conta>> carregarDoArquivo() {
         try (FileReader reader = new FileReader(ARQUIVO)) {
             return gson.fromJson(reader, tipoDados);

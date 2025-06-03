@@ -5,8 +5,10 @@ import core.PasswordService;
 import utils.PasswordLeakChecker;
 import utils.PasswordGenerator;
 
+// Classe principal que representa PasswordManagerApp
 public class PasswordManagerApp {
 
+// Método que executa mostrarMenu
     public static void mostrarMenu() {
         System.out.println("\nGERENCIADOR DE SENHAS SEGURAS");
         System.out.println("1. Cadastrar nova conta");
@@ -16,6 +18,7 @@ public class PasswordManagerApp {
         System.out.print("Selecione uma alternativa: ");
     }
 
+// Método que executa main
     public static void main(String[] args) {
         Scanner inputScanner = new Scanner(System.in);
         PasswordService passwordService = new PasswordService();

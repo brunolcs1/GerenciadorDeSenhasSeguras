@@ -6,8 +6,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.MessageDigest;
 
+// Classe principal que representa HIBPClient
 public class HIBPClient {
 
+// Construtor ou método público: senhaVazada
     public static boolean senhaVazada(String senha) {
         try {
             String hash = sha1(senha).toUpperCase();
@@ -36,6 +38,7 @@ public class HIBPClient {
         return false;
     }
 
+// Método auxiliar: sha1
     private static String sha1(String senha) throws Exception {
         MessageDigest md = MessageDigest.getInstance("SHA-1");
         byte[] bytes = md.digest(senha.getBytes("UTF-8"));
